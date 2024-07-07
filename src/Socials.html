@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socials - Connect with Me</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="burger-menu" onclick="toggleSidebar()">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<div class="sidebar" id="sidebar">
+    <a href="Home.html">Home</a>
+    <a href="Socials.html">Socials</a>
+    <a href="Plugins.html">Plugins</a>
+    <a href="Projects.html">Projects</a>
+</div>
+<div class="content socials-content">
+    <h1>Connect Me</h1>
+    <div class="social-link">
+        <a href="https://twitch.tv/pacco_the_taco" target="_blank">
+            <img src="pictures/TwitchLogo.png" alt="Twitch Logo">
+            Twitch
+        </a>
+    </div>
+    <div class="social-link">
+        <a href="https://www.instagram.com/_pacco_the_taco" target="_blank">
+            <img src="pictures/InstagramLogo.png" alt="Instagram Logo">
+            Instagram
+        </a>
+    </div>
+    <div class="social-link">
+        <a href="https://github.com/PaccoTheTaco" target="_blank">
+            <img src="pictures/GithubLogo.png" alt="Github Logo">
+            GitHub
+        </a>
+    </div>
+    <div class="social-link">
+        <a href="https://paccothetaco.com/discord" target="_blank">
+            <img src="pictures/DiscordLogo.png" alt="Discord Logo">
+            Discord Server
+        </a>
+    </div>
+</div>
+<div class="bottom-bar"></div>
+
+<script>
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('open');
+    }
+</script>
+</body>
+</html>
