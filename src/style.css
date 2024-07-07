@@ -98,6 +98,12 @@ h1 {
     margin: 20px;
 }
 
+.workinprogress-image {
+    width: 600px;
+    height: auto;
+    margin: 40px;
+}
+
 .bottom-bar {
     width: 100%;
     height: 50px;
@@ -133,4 +139,24 @@ h1 {
     width: 50px;
     height: 50px;
     margin-right: 15px;
+}
+
+.project-list {
+    margin-top: 20px;
+}
+
+.project {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.project span {
+    font-size: 1.2em;
+    margin-right: 10px;
+}
+
+.github-logo {
+    width: 1.2em;  /* Gleiche Größe wie die Schrift */
+    height: auto;
 }

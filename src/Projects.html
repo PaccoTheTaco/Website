@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Work in Progress</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="burger-menu" onclick="toggleSidebar()">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<div class="sidebar" id="sidebar">
+    <a href="Home.html">Home</a>
+    <a href="Socials.html">Socials</a>
+    <a href="Plugins.html">Plugins</a>
+    <a href="Projects.html">Projects</a>
+</div>
+<div class="content">
+    <h1>Projects | Work in Progress</h1>
+    <img src="pictures/Work_in_Progress.png" alt="Work in Progress Image" class="workinprogress-image">
+    <div class="project-list">
+        <div class="project">
+            <span>Toolbox Discordbot</span>
+            <a href="https://github.com/PaccoTheTaco/Toolbox">
+                <img src="pictures/GithubLogo.png" alt="GitHub Logo" class="github-logo">
+            </a>
+        </div>
+        <div class="project">
+            <span>Website</span>
+            <a href="https://github.com/PaccoTheTaco/Website">
+                <img src="pictures/GithubLogo.png" alt="GitHub Logo" class="github-logo">
+            </a>
+        </div>
+    </div>
+</div>
+<div class="bottom-bar"></div>
+
+<script>
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('open');
+    }
+</script>
+</body>
+</html>
