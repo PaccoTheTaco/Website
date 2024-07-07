@@ -1,12 +1,12 @@
 body {
     margin: 0;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     font-family: Arial, sans-serif;
-    font-size: 2rem;
+    font-size: 1.5rem;  /* Schriftgröße verkleinern */
     background: radial-gradient(circle, rgba(126, 87, 241, 0.7) 0%, rgba(69, 73, 204, 0.7) 100%);
     overflow: hidden;
     position: relative;
@@ -24,7 +24,7 @@ body {
     flex-direction: column;
     justify-content: space-around;
     cursor: pointer;
-    z-index: 3; /* Ensure the burger menu is above other elements */
+    z-index: 3;
 }
 
 .burger-menu div {
@@ -47,7 +47,7 @@ body {
     background-color: rgba(0, 0, 0, 0.8);
     transform: translateX(-250px);
     transition: transform 0.3s ease;
-    z-index: 2; /* Ensure the sidebar is above other elements but below the burger menu */
+    z-index: 2;
     display: flex;
     flex-direction: column;
     padding-top: 60px;
@@ -70,7 +70,7 @@ body {
 
 .sidebar a:hover {
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 10px; /* Adjust this value to control the roundness */
+    border-radius: 10px;
 }
 
 .content {
@@ -80,15 +80,15 @@ body {
     justify-content: flex-start;
     text-align: center;
     flex-grow: 1;
-    z-index: 1; /* Ensure the content is below the sidebar */
-    padding: 20px;
-    padding-top: 60px; /* Add some padding to move content down */
+    z-index: 1;
+    padding: 10px;
+    padding-top: 50px;
     width: 100%;
 }
 
 h1 {
-    font-size: 3rem;
-    margin: 20px 0;
+    font-size: 2.5rem;
+    margin: 10px 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -142,21 +142,47 @@ h1 {
 }
 
 .project-list {
-    margin-top: 20px;
+    margin-top: 10px;
+    width: 80%;
 }
 
 .project {
     display: flex;
+    flex-direction: column;
     align-items: center;
     margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
 }
 
-.project span {
-    font-size: 1.2em;
-    margin-right: 10px;
+.project h2 {
+    font-size: 1.3em;
+    margin-bottom: 5px;
+}
+
+.project p {
+    font-size: 0.9em;
+    margin-bottom: 5px;
+    text-align: center;
 }
 
 .github-logo {
-    width: 1.2em;  /* Gleiche Größe wie die Schrift */
+    width: 1.5em;
     height: auto;
+    margin-top: 5px;
+}
+
+.more-projects {
+    margin-top: 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    width: 80%;
+}
+
+.more-projects p {
+    font-size: 1em;
+    text-align: center;
 }
