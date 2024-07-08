@@ -6,7 +6,7 @@ body {
     justify-content: space-between;
     align-items: center;
     font-family: Arial, sans-serif;
-    font-size: 1.5rem;  /* Schriftgröße verkleinern */
+    font-size: 1.5rem;
     background: radial-gradient(circle, rgba(126, 87, 241, 0.7) 0%, rgba(69, 73, 204, 0.7) 100%);
     overflow: hidden;
     position: relative;
