@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Work in Progress</title>
+    <title>Contact - Submit a Ticket</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,25 +20,24 @@
     <a href="contact.html">Contact</a>
 </div>
 <div class="content">
-    <h1>Projects</h1>
-    <div class="project-list">
-        <div class="project">
-            <h2>Toolbox Discordbot</h2>
-            <p>A versatile Discord bot that offers various tools and features to manage your Discord community.</p>
-            <a href="https://github.com/PaccoTheTaco/Toolbox">
-                <img src="pictures/GithubLogo.png" alt="GitHub Logo" class="github-logo">
-            </a>
-        </div>
-        <div class="project">
-            <h2>Website</h2>
-            <p>My website that I am currently developing.</p>
-            <a href="https://github.com/PaccoTheTaco/Website">
-                <img src="pictures/GithubLogo.png" alt="GitHub Logo" class="github-logo">
-            </a>
-        </div>
-    </div>
-    <div class="more-projects">
-        <p>There will be more to come, but these are my current projects.</p>
+    <h1>Submit a Ticket</h1>
+    <div class="contact-form">
+        <h2>Contact form</h2>
+        <form action="submit_form.php" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+
+            <label for="email">E-mail address:</label>
+            <input type="email" id="email" name="email" required>
+
+            <button type="submit">Submit</button>
+        </form>
     </div>
 </div>
 <div class="bottom-bar"></div>

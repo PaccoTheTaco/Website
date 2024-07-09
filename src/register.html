@@ -3,16 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Submit a Ticket</title>
+    <title>Register - Welcome to My Website</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<?php
-session_start();
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
-?>
 <div class="burger-menu" onclick="toggleSidebar()">
     <div></div>
     <div></div>
@@ -26,28 +20,27 @@ if (empty($_SESSION['csrf_token'])) {
     <a href="contact.html">Contact</a>
 </div>
 <div class="content">
-    <h1>Submit a Ticket</h1>
-    <div class="contact-form">
-        <h2>Kontaktformular</h2>
-        <form action="submit_form.php" method="post">
+    <h1>Register</h1>
+    <div class="form-container">
+        <form action="register.php" method="POST">
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="title">Titel:</label>
-            <input type="text" id="title" name="title" required>
-
-            <label for="description">Beschreibung:</label>
-            <textarea id="description" name="description" rows="4" required></textarea>
-
-            <label for="email">E-Mail-Adresse:</label>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
-
-            <button type="submit">Absenden</button>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <button type="submit">Register</button>
         </form>
+        <p>If you already have an account, then <a href="login.html">log in</a>.</p>
     </div>
 </div>
-<div class="bottom-bar"></div>
+<div class="bottom-bar">
+    <a href="login.html" class="login-button">Login</a>
+</div>
 
 <script>
     function toggleSidebar() {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Welcome to My Website</title>
+    <title>Login - Welcome to My Website</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,8 +20,20 @@
     <a href="contact.html">Contact</a>
 </div>
 <div class="content">
-    <h1>Welcome to My Website</h1>
-    <img src="pictures/Hey.png" alt="Hey Image" class="welcome-image">
+    <h1>Login</h1>
+    <div class="form-container">
+        <form action="login.php" method="POST">
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+            <label for="identifier">Username or Email:</label>
+            <input type="text" id="identifier" name="identifier" required>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <button type="submit">Login</button>
+        </form>
+        <p>You don't have an account yet? Then <a href="register.html">register</a>.</p>
+    </div>
 </div>
 <div class="bottom-bar">
     <a href="login.html" class="login-button">Login</a>
