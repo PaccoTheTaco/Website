@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="burger-menu" onclick="toggleSidebar()">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<div class="sidebar" id="sidebar">
+    <a href="../home.html">Home</a>
+    <a href="../socials.html">Socials</a>
+    <a href="../plugins.html">Plugins</a>
+    <a href="../projects.html">Projects</a>
+    <a href="../games.html">Games</a>
+</div>
+<div class="content">
+    <h1>Snake Game</h1>
+    <div id="snake-game">
+        <button id="snake-start-button">Play</button>
+    </div>
+    <div id="snake-score-display">Score: 0</div>
+</div>
+<div class="bottom-bar"></div>
+
+<script>
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    const gameArea = document.getElementById('snake-game');
+    const scoreDisplay = document.getElementById('snake-score-display');
+    const startButton = document.getElementById('snake-start-button');
+
+    const gameSize = 400;
+    const snakeSize = 20;
+    let snake = [{x: 100, y: 100}];
+    let food = {x: 200, y: 200};
+    let direction = 'RIGHT';
+    let score = 0;
+
+    function createElement(type, coords) {
+        const element = document.createElement('div');
+        element.classList.add(type);
+        element.style.left = coords.x + 'px';
+        element.style.top = coords.y + 'px';
+        gameArea.appendChild(element);
+        return element;
+    }
+
+    function drawSnake() {
+        gameArea.innerHTML = '';
+        snake.forEach(segment => createElement('snake', segment));
+        createElement('snake-food', food);
+    }
+
+    function moveSnake() {
+        const head = {...snake[0]};
+
+        switch (direction) {
+            case 'RIGHT':
+                head.x += snakeSize;
+                break;
+            case 'LEFT':
+                head.x -= snakeSize;
+                break;
+            case 'UP':
+                head.y -= snakeSize;
+                break;
+            case 'DOWN':
+                head.y += snakeSize;
+                break;
+        }
+
+        snake.unshift(head);
+
+        if (head.x === food.x && head.y === food.y) {
+            score++;
+            updateScore();
+            placeFood();
+        } else {
+            snake.pop();
+        }
+
+        if (head.x < 0 || head.y < 0 || head.x >= gameSize || head.y >= gameSize || snakeCollision(head)) {
+            alert(`Game Over! Your score is ${score}`);
+            resetGame();
+        }
+    }
+
+    function updateScore() {
+        scoreDisplay.textContent = `Score: ${score}`;
+    }
+
+    function placeFood() {
+        food.x = Math.floor(Math.random() * (gameSize / snakeSize)) * snakeSize;
+        food.y = Math.floor(Math.random() * (gameSize / snakeSize)) * snakeSize;
+    }
+
+    function snakeCollision(head) {
+        return snake.slice(1).some(segment => segment.x === head.x && segment.y === head.y);
+    }
+
+    function resetGame() {
+        snake = [{x: 100, y: 100}];
+        direction = 'RIGHT';
+        score = 0;
+        updateScore();
+        placeFood();
+    }
+
+    document.addEventListener('keydown', e => {
+        switch (e.keyCode) {
+            case 37:
+                if (direction !== 'RIGHT') direction = 'LEFT';
+                break;
+            case 38:
+                if (direction !== 'DOWN') direction = 'UP';
+                break;
+            case 39:
+                if (direction !== 'LEFT') direction = 'RIGHT';
+                break;
+            case 40:
+                if (direction !== 'UP') direction = 'DOWN';
+                break;
+        }
+    });
+
+    function gameLoop() {
+        moveSnake();
+        drawSnake();
+        setTimeout(gameLoop, 100);
+    }
+
+    startButton.addEventListener('click', () => {
+        startButton.style.display = 'none';
+        scoreDisplay.style.display = 'block';
+        resetGame();
+        gameLoop();
+    });
+</script>
+</body>
+</html>
