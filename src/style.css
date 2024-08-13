@@ -356,3 +356,49 @@ select:focus {
     background-color: rgba(69, 73, 204, 1);
     color: white;
 }
+
+/* Plugins */
+.plugin-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.plugin-header img.plugin-image {
+    margin-right: 10px;
+    width: 40px;
+    height: auto;
+}
+
+.plugin-header h2 {
+    margin: 0;
+}
+
+.plugin-section {
+    text-align: center;
+}
+
+ul {
+    list-style-position: outside;
+    padding-left: 0;
+    font-size: 20px;
+    text-align: left;
+    margin: 10px auto; /* Reduce the margin to bring the list closer to the surrounding text */
+    max-width: 300px;
+}
+
+ul li {
+    font-size: 1.2em;
+    line-height: 1.4;
+    margin-left: 15px;
+}
+
+ul li::marker {
+    font-size: 1.5em;
+}
+
+p {
+    margin-top: 10px;  /* Adjust the top margin of paragraphs to bring the text closer */
+    margin-bottom: 10px; /* Adjust the bottom margin similarly */
+}
