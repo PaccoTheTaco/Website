@@ -21,10 +21,27 @@
 </div>
 <div class="content">
     <h1>Snake Game</h1>
-    <div id="snake-game">
-        <button id="snake-start-button">Play</button>
+    <div id="snake-control-selection">
+        <label for="snake-control-method">Choose Control Method:</label>
+        <select id="snake-control-method">
+            <option value="arrows">Arrow Keys</option>
+            <option value="wasd">WASD Keys</option>
+        </select>
     </div>
-    <div id="snake-score-display">Score: 0</div>
+    <div id="snake-game-container">
+        <div id="snake-game">
+            <button id="snake-start-button">Play</button>
+        </div>
+        <div id="snake-score-display">Score: 0</div>
+    </div>
+    <div id="game-over-container" style="display:none; text-align:center;">
+        <div id="snake-game-over-text" style="font-size: 24px; color: #fff; margin-top: 20px;">
+            Game Over!<br>Your Score: <span id="score-value"></span><br>Best Score: <span id="best-score-value"></span>
+        </div>
+        <button id="play-again-button" style="padding: 20px 40px; background-color: #0f0; color: #000; font-size: 24px; border: none; cursor: pointer; border-radius: 5px; margin-top: 20px;">
+            Play again
+        </button>
+    </div>
 </div>
 <div class="bottom-bar"></div>
 
@@ -36,6 +53,13 @@
     const gameArea = document.getElementById('snake-game');
     const scoreDisplay = document.getElementById('snake-score-display');
     const startButton = document.getElementById('snake-start-button');
+    const gameOverContainer = document.getElementById('game-over-container');
+    const playAgainButton = document.getElementById('play-again-button');
+    const snakeGameContainer = document.getElementById('snake-game-container');
+    const scoreValue = document.getElementById('score-value');
+    const bestScoreValue = document.getElementById('best-score-value');
+    const controlMethodSelect = document.getElementById('snake-control-method');
+    let controlMethod = controlMethodSelect.value;
 
     const gameSize = 400;
     const snakeSize = 20;
@@ -43,6 +67,9 @@
     let food = {x: 200, y: 200};
     let direction = 'RIGHT';
     let score = 0;
+    let gameInterval;
+    let isGameOver = false;
+    let bestScore = localStorage.getItem('bestScore') || 0;
 
     function createElement(type, coords) {
         const element = document.createElement('div');
@@ -60,6 +87,7 @@
     }
 
     function moveSnake() {
+        if (isGameOver) return;
         const head = {...snake[0]};
 
         switch (direction) {
@@ -77,6 +105,9 @@
                 break;
         }
 
+        if (head.x < 0 || head.y < 0 || head.x >= gameSize || head.y >= gameSize || snakeCollision(head)) {
+            gameOver();
+            return;}
         snake.unshift(head);
 
         if (head.x === food.x && head.y === food.y) {
@@ -86,11 +117,19 @@
         } else {
             snake.pop();
         }
+    }
 
-        if (head.x < 0 || head.y < 0 || head.x >= gameSize || head.y >= gameSize || snakeCollision(head)) {
-            alert(`Game Over! Your score is ${score}`);
-            resetGame();
+    function gameOver() {
+        clearTimeout(gameInterval);
+        isGameOver = true;
+        snakeGameContainer.style.display = 'none';
+        if (score > bestScore) {
+            bestScore = score;
+            localStorage.setItem('bestScore', bestScore);
         }
+        scoreValue.textContent = score;
+        bestScoreValue.textContent = bestScore;
+        gameOverContainer.style.display = 'block';
     }
 
     function updateScore() {
@@ -110,36 +149,72 @@
         snake = [{x: 100, y: 100}];
         direction = 'RIGHT';
         score = 0;
+        isGameOver = false;
         updateScore();
         placeFood();
+        snakeGameContainer.style.display = 'block';
+        gameOverContainer.style.display = 'none';
+        gameArea.innerHTML = '';
     }
 
+    controlMethodSelect.addEventListener('change', (e) => {
+        controlMethod = e.target.value;
+        e.target.blur();
+    });
+
     document.addEventListener('keydown', e => {
-        switch (e.keyCode) {
-            case 37:
-                if (direction !== 'RIGHT') direction = 'LEFT';
-                break;
-            case 38:
-                if (direction !== 'DOWN') direction = 'UP';
-                break;
-            case 39:
-                if (direction !== 'LEFT') direction = 'RIGHT';
-                break;
-            case 40:
-                if (direction !== 'UP') direction = 'DOWN';
-                break;
+        if (isGameOver) return;
+
+        if (controlMethod === 'arrows') {
+            switch (e.keyCode) {
+                case 37:
+                    if (direction !== 'RIGHT') direction = 'LEFT';
+                    break;
+                case 38:
+                    if (direction !== 'DOWN') direction = 'UP';
+                    break;
+                case 39:
+                    if (direction !== 'LEFT') direction = 'RIGHT';
+                    break;
+                case 40:
+                    if (direction !== 'UP') direction = 'DOWN';
+                    break;
+            }
+        }
+
+        if (controlMethod === 'wasd') {
+            switch (e.keyCode) {
+                case 65:
+                    if (direction !== 'RIGHT') direction = 'LEFT';
+                    break;
+                case 87:
+                    if (direction !== 'DOWN') direction = 'UP';
+                    break;
+                case 68:
+                    if (direction !== 'LEFT') direction = 'RIGHT';
+                    break;
+                case 83:
+                    if (direction !== 'UP') direction = 'DOWN';
+                    break;
+            }
         }
     });
 
     function gameLoop() {
-        moveSnake();
-        drawSnake();
-        setTimeout(gameLoop, 100);
+        if (!isGameOver) {
+            moveSnake();
+            drawSnake();
+            gameInterval = setTimeout(gameLoop, 100);
+        }
     }
 
     startButton.addEventListener('click', () => {
+        resetGame();
         startButton.style.display = 'none';
         scoreDisplay.style.display = 'block';
+        gameLoop();
+    });
+    playAgainButton.addEventListener('click', () => {
         resetGame();
         gameLoop();
     });
